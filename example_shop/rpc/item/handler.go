@@ -4,7 +4,7 @@ import (
 	"context"
 	"log"
 
-	item "example_shop/kitex_gen/example/shop/item"
+	"example_shop/kitex_gen/example/shop/item"
 	"example_shop/kitex_gen/example/shop/stock"
 	"example_shop/kitex_gen/example/shop/stock/stockservice"
 

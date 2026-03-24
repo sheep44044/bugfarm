@@ -2,6 +2,8 @@ package main
 
 import (
 	"context"
+	"example_shop/api/handlers"
+	"example_shop/api/rpc"
 	"example_shop/kitex_gen/example/shop/item"
 	"example_shop/kitex_gen/example/shop/item/itemservice"
 	"log"
@@ -17,6 +19,7 @@ import (
 var cli itemservice.Client
 
 func main() {
+	rpc.InitUserRpcClient()
 	resolver, err := etcd.NewEtcdResolver([]string{"127.0.0.1:2379"})
 	if err != nil {
 		log.Fatal(err)
@@ -31,6 +34,7 @@ func main() {
 	hz := server.New(server.WithHostPorts("localhost:8889"))
 
 	hz.GET("/api/item", Handler)
+	hz.POST("/register", handlers.Register)
 
 	if err := hz.Run(); err != nil {
 		log.Fatal(err)
